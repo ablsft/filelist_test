@@ -5,15 +5,14 @@ from pathlib import Path
 import json
 from datetime import datetime
 
+from filelist_api.settings import BASE_DIR
 from config import DIR
 
-current_dir = Path.cwd()
 
 def file_list(request):
-    data_path = Path(f'{current_dir}/{DIR}')
+    data_path = BASE_DIR.joinpath(DIR)
     if not data_path.is_dir():
         data_path = Path(DIR)
-
     try:
         files = [x for x in data_path.iterdir() if x.is_file()]
     except FileNotFoundError:
